@@ -1,4 +1,4 @@
 source "http://rubygems.org"
 
-gem "httparty"
+gem "gems"
 gem "dotenv"
