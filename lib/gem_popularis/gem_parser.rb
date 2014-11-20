@@ -26,6 +26,14 @@ module GemPopularis
       @version ||= match_data[2]
     end
 
+    # Public: Returns true/false based on if we know right away that this isn't a valid
+    # gem.
+    #
+    # Returns true or false.
+    def valid?
+      !["", "*** REMOTE GEMS ***"].include?(@raw_string) && name && version
+    end
+
     private
 
     # Internal: Use a regular expression to match multiple pieces of information from the given

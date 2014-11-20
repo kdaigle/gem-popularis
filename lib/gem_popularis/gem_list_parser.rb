@@ -13,21 +13,11 @@ module GemPopularis
     # Returns a Hash of format {gem_name => gem_version}
     def gems
       @gems ||= @raw_output.split("\n").inject({}) do |result, string|
-        if response_boilerplate?(string)
-          result
-        else
-          parser = GemParser.new(string)
-          result.merge!(parser.name => parser.version)
-        end
+        parser = GemParser.new(string)
+        result.merge!(parser.name => parser.version) if parser.valid?
+        result
       end
     end
-
-    private
-
-    def response_boilerplate?(string)
-      ["", "*** REMOTE GEMS ***"].include?(string)
-    end
-
   end
 
 end

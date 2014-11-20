@@ -13,4 +13,12 @@ class GemParserTest < Minitest::Test
     assert_equal "0.0.1", parser.version
   end
 
+  def test_parse_boilerplate
+    parser = GemPopularis::GemParser.new("")
+    refute parser.valid?
+
+    parser = GemPopularis::GemParser.new("*** REMOTE GEMS ***")
+    refute parser.valid?
+  end
+
 end
